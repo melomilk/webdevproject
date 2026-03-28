@@ -1,15 +1,12 @@
 # Webdev Project
 
 ## Description
-A Django-based web application. we do beauty salon here
+A web application for a beauty salon, including appointments, clients, and services.
 
-## Installation
-1. Clone the repo
-2. Create virtual environment: `python -m venv venv`
-3. Install dependencies: `pip install -r requirements.txt`
-4. Run server: `python manage.py runserver`
+## Team Members
+Milana Pak, Darya Beloussova, Arai Dallishova.
 
 ## Technologies Used
-- Python
+- Angular
 - Django
 - SQL
