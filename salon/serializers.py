@@ -29,8 +29,12 @@ class BookingSerializer(serializers.Serializer):
 
 
 class ReviewSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
+    
     name = serializers.CharField(max_length=200)
-    text = serializers.TextField()
+    text = serializers.CharField()
     rating = serializers.IntegerField(min_value=1, max_value=5)
 
     def create(self, validated_data):
