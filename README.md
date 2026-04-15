@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # WebdevProject
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
@@ -57,3 +58,17 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# Webdev Project
+
+## Description
+A web application for a beauty salon, including appointments, clients, and services.
+
+## Team Members
+Milana Pak, Darya Beloussova, Arai Dallishova.
+
+## Technologies Used
+- Angular
+- Django
+- SQL
+>>>>>>> ed9a358e4868d50226bd02ebacaeea7181124cbb
