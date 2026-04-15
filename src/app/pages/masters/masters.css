@@ -1,0 +1,50 @@
+.masters {
+  padding: 20px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 80px;
+  border-radius: 50%;
+}
+
+.selected {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #ff4da6;
+}
+.masters .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.masters .card {
+  text-align: center;
+  padding: 15px;
+}
+
+.masters img {
+  width: 80px;
+  border-radius: 50%;
+}
