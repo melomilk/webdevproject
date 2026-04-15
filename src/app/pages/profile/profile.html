@@ -1,0 +1,14 @@
+<div class="profile">
+  <h2>My Profile 👤</h2>
+
+  @if (token) {
+    <div class="card">
+      <p><b>Welcome!</b></p>
+      <p>Token: {{ token }}</p>
+
+      <button (click)="logout()">Logout</button>
+    </div>
+  } @else {
+    <p>You are not logged in ❌</p>
+  }
+</div>

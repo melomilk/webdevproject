@@ -1,0 +1,25 @@
+.page {
+  width: 100vw;
+  height: 100vh;
+
+  background: url("/beauty.jpg") center/cover no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 500px;
+  padding: 40px;
+
+  border-radius: 20px;
+
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+
+  color: white;
+  text-align: center;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}

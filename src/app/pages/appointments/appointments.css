@@ -1,0 +1,104 @@
+.page {
+  width: 100vw;
+  height: 100vh;
+
+  background: url("/beauty.jpg") center/cover no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking-card {
+  width: 420px;
+  padding: 40px;
+
+  border-radius: 20px;
+
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+
+  color: white;
+  text-align: center;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.booking-card h1 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.booking-card p {
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form input,
+.form select {
+  padding: 12px;
+  border-radius: 10px;
+
+  border: none;
+  outline: none;
+
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.form input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.form button {
+  margin-top: 10px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #42392e;
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.form button:hover {
+  background: #42392e;
+  transform: translateY(-2px);
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  color: white;
+  text-decoration: none;
+
+  font-size: 14px;
+  letter-spacing: 1px;
+
+  padding: 8px 12px;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-3px);
+}
