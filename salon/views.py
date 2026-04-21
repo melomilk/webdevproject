@@ -5,9 +5,11 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Service, Master, Gallery, Booking, Review
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import (
     ServiceSerializer, MasterSerializer,
-    GallerySerializer, BookingSerializer, ReviewSerializer
+    GallerySerializer, BookingSerializer, ReviewSerializer,
+    MyTokenObtainPairSerializer,
 )
 
 
@@ -33,6 +35,8 @@ class MasterListView(APIView):
         serializer = MasterSerializer(masters, many=True)
         return Response(serializer.data)
 
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 # FUNCTION-BASED VIEWS
 @api_view(['GET'])
@@ -99,3 +103,4 @@ def reviews(request):
             serializer.save(user=request.user, name=request.user.username)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    

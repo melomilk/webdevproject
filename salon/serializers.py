@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Service, Master, Gallery, Booking, Review
-
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 # ModelSerializers (automatically generates fields from the model)
 class ServiceSerializer(serializers.ModelSerializer):
@@ -45,3 +45,15 @@ class GallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = Gallery
         fields = '__all__'
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        
+        # Add custom claims to the token
+        token['username'] = user.username
+        token['role'] = user.profile.role
+        
+        return token
