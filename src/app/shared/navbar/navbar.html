@@ -10,10 +10,23 @@
     <a routerLink="/appointments">Appointments</a>
     <a routerLink="/masters">Masters</a>
     <a routerLink="/profile">Profile</a>
+
+    @if (auth.isManager()) {
+      <a routerLink="/manager-bookings">Manage Bookings</a>
+    }
+
+    @if (auth.isMaster()) {
+      <a routerLink="/master-portfolio">My Portfolio</a>
+    }
   </div>
 
   <div class="auth">
-    <a routerLink="/login">Login</a>
+    @if (auth.currentUser(); as user) {
+      <span class="username">Hi, {{ user.username }}</span>
+      <a (click)="logout()" class="logout-link">Logout</a>
+    } @else {
+      <a routerLink="/login">Login</a>
+    }
   </div>
 
 </nav>

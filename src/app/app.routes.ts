@@ -15,21 +15,28 @@ import { Reviews } from './pages/reviews/reviews';
 import { Consultation } from './pages/consultation/consultation';
 import { Offers } from './pages/offers/offers';
 
-export const routes: Routes = [
-  { path: '', component: HomeComponent },
+import { authGuard, managerGuard, masterGuard } from './guards/auth.guards';
 
+export const routes: Routes = [
+  // Public routes (anyone can access)
+  { path: '', component: HomeComponent },
   { path: 'login', component: Login },
   { path: 'services', component: Services },
   { path: 'appointments', component: Appointments },
   { path: 'masters', component: Masters },
-  { path: 'profile', component: Profile },
-
-  // 🔥 ДОБАВЬ ЭТИ
   { path: 'about', component: About },
   { path: 'pricing', component: Pricing },
   { path: 'portfolio', component: Portfolio },
   { path: 'reviews', component: Reviews },
-
   { path: 'consultation', component: Consultation },
   { path: 'offers', component: Offers },
+
+  // Protected routes (must be logged in)
+  { path: 'profile', component: Profile, canActivate: [authGuard] },
+
+  // Manager-only route
+  // { path: 'manager-bookings', component: ManagerBookings, canActivate: [managerGuard] },
+
+  // Master-only route
+  // { path: 'master-portfolio', component: MasterPortfolio, canActivate: [masterGuard] },
 ];
