@@ -57,3 +57,20 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.rating}★"
+    
+class Profile(models.Model):
+    ROLE_CUSTOMER = 'customer'
+    ROLE_MASTER = 'master'
+    ROLE_MANAGER = 'manager'
+    
+    ROLE_CHOICES = [
+        (ROLE_CUSTOMER, 'Customer'),
+        (ROLE_MASTER, 'Master'),
+        (ROLE_MANAGER, 'Manager'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default=ROLE_CUSTOMER)
+    
+    def __str__(self):
+        return f"{self.user.username} ({self.role})"
