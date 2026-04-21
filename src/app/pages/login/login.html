@@ -1,12 +1,33 @@
-<div class="login">
-  <h2>Login 💖</h2>
+!
+<div class="login-page">
+  <div class="login-card">
+    <h2>Welcome!</h2>
+    <p class="subtitle">Sign in to continue (manager or master)</p>
 
-  <input placeholder="Username" [(ngModel)]="username" />
-  <input placeholder="Password" type="password" [(ngModel)]="password" />
+    <input
+      placeholder="Username"
+      [(ngModel)]="username"
+      [disabled]="loading"
+      (keyup.enter)="login()"
+    />
+    <input
+      placeholder="Password"
+      type="password"
+      [(ngModel)]="password"
+      [disabled]="loading"
+      (keyup.enter)="login()"
+    />
 
-  <button (click)="login()">Login</button>
+    <button (click)="login()" [disabled]="loading">
+      @if (loading) {
+        Signing in...
+      } @else {
+        Sign In
+      }
+    </button>
 
-  @if (error) {
-    <p class="error">{{ error }}</p>
-  }
+    @if (error) {
+      <p class="error">{{ error }}</p>
+    }
+  </div>
 </div>
