@@ -1,5 +1,4 @@
 <div class="page">
-
   <div class="booking-card">
     <a class="back-btn" routerLink="/">← Back to Home</a>
 
@@ -7,29 +6,63 @@
     <p>Choose your service and preferred time</p>
 
     <form class="form" (ngSubmit)="submit()">
+      <input
+        type="text"
+        [(ngModel)]="form.name"
+        name="name"
+        placeholder="Full Name"
+        [disabled]="submitting"
+      />
 
-      <input type="text" [(ngModel)]="form.name" name="name" placeholder="Full Name" />
+      <input
+        type="text"
+        [(ngModel)]="form.phone"
+        name="phone"
+        placeholder="Phone Number"
+        [disabled]="submitting"
+      />
 
-      <input type="text" [(ngModel)]="form.phone" name="phone" placeholder="Phone Number" />
-
-      <select [(ngModel)]="form.service" name="service">
-        <option value="">Select Service</option>
-        <option>Hair Styling</option>
-        <option>Makeup</option>
-        <option>Nails</option>
-        <option>Skincare</option>
+      <select
+        [(ngModel)]="form.service"
+        name="service"
+        [disabled]="submitting"
+      >
+        <option [ngValue]="''">Select Service</option>
+        @for (service of services(); track service.id) {
+          <option [ngValue]="service.id">
+            {{ service.name }} — ${{ service.price }}
+          </option>
+        }
       </select>
 
-      <input type="date" [(ngModel)]="form.date" name="date" />
-      <input type="time" [(ngModel)]="form.time" name="time" />
+      <input
+        type="date"
+        [(ngModel)]="form.date"
+        name="date"
+        [disabled]="submitting"
+      />
+      <input
+        type="time"
+        [(ngModel)]="form.time"
+        name="time"
+        [disabled]="submitting"
+      />
 
-      <button type="submit">Confirm Booking</button>
-
+      <button type="submit" [disabled]="submitting">
+        @if (submitting) {
+          Booking...
+        } @else {
+          Confirm Booking
+        }
+      </button>
     </form>
 
-    <p *ngIf="success">✅ Booking successful!</p>
-    <p *ngIf="error">❌ Something went wrong</p>
+    @if (success) {
+      <p class="success">✅ Booking successful! We'll call you to confirm.</p>
+    }
 
+    @if (error) {
+      <p class="error">❌ {{ error }}</p>
+    }
   </div>
-
 </div>

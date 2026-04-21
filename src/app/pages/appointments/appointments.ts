@@ -1,52 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ApiService, Service } from '../../services/api';
 
 @Component({
   selector: 'app-appointments',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './appointments.html',
   styleUrls: ['./appointments.css'],
 })
-export class Appointments {
+export class Appointments implements OnInit {
+  private api = inject(ApiService);
+
+  services = signal<Service[]>([]);
 
   form = {
     name: '',
     phone: '',
-    service: '',
+    service: '' as number | '',  // will hold service ID (number)
     date: '',
-    time: ''
+    time: '',
   };
 
   success = false;
-  error = false;
+  error = '';
+  submitting = false;
+
+  ngOnInit() {
+    this.api.getServices().subscribe({
+      next: (data) => this.services.set(data),
+      error: (err) => console.error('Failed to load services:', err),
+    });
+  }
 
   submit() {
-    // просто проверка (типо "отправили")
+    this.error = '';
+    this.success = false;
+
+    // Basic validation
     if (
-      this.form.name &&
-      this.form.phone &&
-      this.form.service &&
-      this.form.date &&
-      this.form.time
+      !this.form.name ||
+      !this.form.phone ||
+      !this.form.service ||
+      !this.form.date ||
+      !this.form.time
     ) {
-      this.success = true;
-      this.error = false;
-
-      console.log('Данные формы:', this.form);
-
-      // очистка формы
-      this.form = {
-        name: '',
-        phone: '',
-        service: '',
-        date: '',
-        time: ''
-      };
-    } else {
-      this.error = true;
-      this.success = false;
+      this.error = 'Please fill in all fields.';
+      return;
     }
+
+    this.submitting = true;
+
+    this.api.createBooking(this.form).subscribe({
+      next: () => {
+        this.success = true;
+        this.submitting = false;
+        // Reset form
+        this.form = {
+          name: '',
+          phone: '',
+          service: '',
+          date: '',
+          time: '',
+        };
+      },
+      error: (err) => {
+        this.submitting = false;
+        this.error = 'Failed to create booking. Please try again.';
+        console.error('Booking error:', err);
+      },
+    });
   }
 }
