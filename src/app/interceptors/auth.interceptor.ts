@@ -6,11 +6,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
   const token = auth.getAccessToken();
 
-  // Don't attach token to login/refresh requests (they don't need it)
   const isAuthEndpoint = req.url.includes('/api/token/');
 
+  // 🔍 DEBUG LOGGING — remove after we fix this
+  console.log('[INTERCEPTOR]', {
+    url: req.url,
+    hasToken: !!token,
+    tokenPreview: token ? token.substring(0, 20) + '...' : 'NULL',
+    isAuthEndpoint,
+    willAttach: !!(token && !isAuthEndpoint),
+  });
+
   if (token && !isAuthEndpoint) {
-    // Clone the request and add the Authorization header
     const cloned = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
@@ -19,6 +26,5 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(cloned);
   }
 
-  // No token or auth endpoint — send request unchanged
   return next(req);
-};  
+};

@@ -30,9 +30,9 @@ export class Login {
         // Redirect based on role
         const role = this.auth.getRole();
         if (role === 'manager') {
-          this.router.navigate(['/appointments']);
+          this.router.navigate(['/manager-bookings']);
         } else if (role === 'master') {
-          this.router.navigate(['/portfolio']);
+          this.router.navigate(['/master-portfolio']);
         } else {
           this.router.navigate(['/']);
         }

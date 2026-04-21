@@ -1,0 +1,40 @@
+<div class="dashboard">
+  <div class="dashboard-card">
+    <h1>Manage Bookings</h1>
+    <p class="subtitle">All incoming appointments</p>
+
+    @if (loading()) {
+      <p class="status">Loading bookings...</p>
+    }
+
+    @if (error()) {
+      <p class="status error">{{ error() }}</p>
+    }
+
+    @if (!loading() && !error() && bookings().length === 0) {
+      <p class="status">No bookings yet.</p>
+    }
+
+    @if (!loading() && bookings().length > 0) {
+      <div class="bookings-list">
+        @for (booking of bookings(); track booking.id) {
+          <div class="booking-card">
+            <div class="booking-info">
+              <div class="booking-name">{{ booking.name }}</div>
+              <div class="booking-details">
+                {{ booking.date }} at {{ booking.time }}
+              </div>
+              <div class="booking-phone"> {{ booking.phone }}</div>
+            </div>
+            <button
+              class="delete-btn"
+              (click)="deleteBooking(booking.id)"
+            >
+              Delete
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

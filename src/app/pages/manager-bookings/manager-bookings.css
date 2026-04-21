@@ -1,0 +1,109 @@
+.dashboard {
+  min-height: 100vh;
+  padding: 100px 20px 40px;
+  background: #1a1410;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-card {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+  background: rgba(30, 25, 22, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: #f5f0eb;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-card h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  text-align: center;
+  margin: 0 0 30px 0;
+  font-weight: 300;
+}
+
+.status {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.75;
+  margin: 30px 0;
+}
+
+.status.error {
+  color: #ff9b9b;
+}
+
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.booking-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.booking-info {
+  flex: 1;
+}
+
+.booking-name {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.booking-details {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.booking-phone {
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+
+.delete-btn {
+  padding: 10px 18px;
+  background: transparent;
+  color: #ff9b9b;
+  border: 1px solid rgba(255, 155, 155, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: all 0.25s ease;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 155, 155, 0.15);
+  border-color: #ff9b9b;
+}

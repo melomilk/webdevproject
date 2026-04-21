@@ -15,8 +15,8 @@ class MasterSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# basic serializers (manual — more control over validation)
 class BookingSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True) 
     name = serializers.CharField(max_length=200)
     phone = serializers.CharField(max_length=20)
     service = serializers.PrimaryKeyRelatedField(queryset=Service.objects.all())

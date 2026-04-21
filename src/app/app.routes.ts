@@ -6,6 +6,7 @@ import { Services } from './pages/services/services';
 import { Appointments } from './pages/appointments/appointments';
 import { Masters } from './pages/masters/masters';
 import { Profile } from './pages/profile/profile';
+import { ManagerBookings } from './pages/manager-bookings/manager-bookings';
 
 import { About } from './pages/about/about';
 import { Pricing } from './pages/pricing/pricing';
@@ -18,7 +19,7 @@ import { Offers } from './pages/offers/offers';
 import { authGuard, managerGuard, masterGuard } from './guards/auth.guards';
 
 export const routes: Routes = [
-  // Public routes (anyone can access)
+  // Public routes
   { path: '', component: HomeComponent },
   { path: 'login', component: Login },
   { path: 'services', component: Services },
@@ -31,12 +32,12 @@ export const routes: Routes = [
   { path: 'consultation', component: Consultation },
   { path: 'offers', component: Offers },
 
-  // Protected routes (must be logged in)
+  // Protected routes
   { path: 'profile', component: Profile, canActivate: [authGuard] },
 
   // Manager-only route
-  // { path: 'manager-bookings', component: ManagerBookings, canActivate: [managerGuard] },
+  { path: 'manager-bookings', component: ManagerBookings, canActivate: [managerGuard] },
 
-  // Master-only route
+  // Master-only route (uncomment when master-portfolio is built)
   // { path: 'master-portfolio', component: MasterPortfolio, canActivate: [masterGuard] },
 ];
