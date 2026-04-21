@@ -1,3 +1,11 @@
+export interface Service {
+  id: number;
+  name: string;
+  category: string;
+  price: string;
+  description: string;
+}
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -25,4 +33,7 @@ export class ApiService {
   login(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login/`, data);
   }
+  hello(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/hello/`);
+}
 }

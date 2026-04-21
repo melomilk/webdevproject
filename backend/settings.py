@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'salon',
 ]
 
+
 MIDDLEWARE = [#checks auth, handles sessions, blocks bad requests, etc.
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',

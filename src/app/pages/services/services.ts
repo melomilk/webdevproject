@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ApiService, Service } from '../../services/api';
 
 @Component({
   selector: 'app-services',
@@ -9,17 +10,29 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './services.html',
   styleUrl: './services.css',
 })
-export class Services {services = [
-    { name: 'Haircut', description: 'Professional haircut', price: 5000 },
-    { name: 'Manicure', description: 'Nail care & design', price: 7000 },
-    { name: 'Makeup', description: 'Evening makeup', price: 12000 },
-    { name: 'Facial', description: 'Skin treatment', price: 9000 },
-  ];
+export class Services implements OnInit {
+  services = signal<Service[]>([]);
+  loading = signal(true);
+  error = signal<string | null>(null);
+  selectedService: Service | null = null;
 
-  selectedService: any = null;
+  constructor(private api: ApiService) {}
 
-  selectService(service: any) {
+  ngOnInit() {
+    this.api.getServices().subscribe({
+      next: (data) => {
+        this.services.set(data);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error('Failed to load services:', err);
+        this.error.set('Could not load services. Try again later.');
+        this.loading.set(false);
+      }
+    });
+  }
+
+  selectService(service: Service) {
     this.selectedService = service;
-  }}
-
-  
+  }
+}

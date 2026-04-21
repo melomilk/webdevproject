@@ -2,22 +2,26 @@
 
   <h1>Our Services</h1>
 
-  <div class="services-grid">
+  <div *ngIf="loading()" class="loading">Loading services...</div>
+
+  <div *ngIf="error()" class="error">{{ error() }}</div>
+
+  <div *ngIf="!loading() && !error()" class="services-grid">
 
     <div class="service-card"
-         *ngFor="let s of services"
+         *ngFor="let s of services()"
          (click)="selectService(s)">
 
-      <h3>{{s.name}}</h3>
-      <p>{{s.description}}</p>
-      <span>{{s.price}} ₸</span>
+      <h3>{{ s.name }}</h3>
+      <p>{{ s.description }}</p>
+      <span>{{ s.price }} ₸</span>
 
     </div>
 
   </div>
 
   <div *ngIf="selectedService" class="selected">
-    <h2>Selected: {{selectedService.name}}</h2>
+    <h2>Selected: {{ selectedService.name }}</h2>
   </div>
 
 </div>

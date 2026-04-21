@@ -36,6 +36,10 @@ class MasterListView(APIView):
 
 # FUNCTION-BASED VIEWS
 @api_view(['GET'])
+def hello_api(request):
+    return Response({"message": "Django and Angular are connected!"})
+
+@api_view(['GET'])
 @permission_classes([AllowAny])
 def gallery_list(request):
     gallery = Gallery.objects.all()
