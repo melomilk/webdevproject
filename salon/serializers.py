@@ -12,7 +12,8 @@ class ServiceSerializer(serializers.ModelSerializer):
 class MasterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Master
-        fields = '__all__'
+        fields = ['id', 'name', 'specialty', 'bio', 'photo']
+        read_only_fields = ['id']
 
 
 class BookingSerializer(serializers.Serializer):
@@ -57,3 +58,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['role'] = user.profile.role
         
         return token
+    
+class MyMasterProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Master
+        fields = ['id', 'name', 'specialty', 'bio', 'photo']
+        read_only_fields = ['id']

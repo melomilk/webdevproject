@@ -19,6 +19,13 @@ class Service(models.Model):
 
 
 class Master(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='master_profile'
+    )
     name = models.CharField(max_length=200)
     specialty = models.CharField(max_length=200)
     bio = models.TextField(blank=True)

@@ -1,0 +1,210 @@
+.dashboard {
+  min-height: 100vh;
+  padding: 100px 20px 40px;
+  background: #1a1410;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 40px;
+  background: rgba(30, 25, 22, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: #f5f0eb;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-card h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.dashboard-card h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 40px 0 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+}
+
+.subtitle {
+  font-style: italic;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  text-align: center;
+  margin: 0 0 30px 0;
+}
+
+.status {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.75;
+  margin: 30px 0;
+}
+
+.status.error {
+  color: #ff9b9b;
+}
+
+/* PROFILE VIEW MODE */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.label {
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+.value {
+  text-align: right;
+  max-width: 60%;
+}
+
+/* EDIT BUTTON */
+.edit-btn {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #5c4a3e;
+  color: #f5f0eb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.edit-btn:hover {
+  background: #6d5a4e;
+}
+
+/* EDIT MODE */
+.edit-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-section label {
+  opacity: 0.7;
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+
+.edit-section input,
+.edit-section textarea {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: #f5f0eb;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.edit-section textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-section input:focus,
+.edit-section textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.save-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.save-btn {
+  background: #5c4a3e;
+  color: #f5f0eb;
+}
+
+.save-btn:hover {
+  background: #6d5a4e;
+}
+
+.cancel-btn {
+  background: transparent;
+  color: #f5f0eb;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.save-msg {
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
+  color: #b5e0b5;
+}
+
+/* BOOKINGS LIST */
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-card {
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.booking-name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.booking-details {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.booking-phone {
+  font-size: 0.85rem;
+  opacity: 0.65;
+}

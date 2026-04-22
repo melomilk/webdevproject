@@ -1,0 +1,79 @@
+<div class="dashboard">
+  <div class="dashboard-card">
+
+    @if (loading()) {
+      <p class="status">Loading your profile...</p>
+    }
+
+    @if (error()) {
+      <p class="status error">{{ error() }}</p>
+    }
+
+    @if (profile(); as p) {
+      <h1>My Portfolio</h1>
+      <p class="subtitle">Manage your information</p>
+
+      <!-- PROFILE VIEW MODE -->
+      @if (!editing()) {
+        <div class="profile-section">
+          <div class="profile-row">
+            <span class="label">Name</span>
+            <span class="value">{{ p.name }}</span>
+          </div>
+          <div class="profile-row">
+            <span class="label">Specialty</span>
+            <span class="value">{{ p.specialty }}</span>
+          </div>
+          <div class="profile-row">
+            <span class="label">Bio</span>
+            <span class="value">{{ p.bio || '(no bio yet)' }}</span>
+          </div>
+
+          <button (click)="startEditing()" class="edit-btn">Edit Profile</button>
+        </div>
+      }
+
+      <!-- PROFILE EDIT MODE -->
+      @if (editing()) {
+        <div class="edit-section">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="editForm.name" name="name" />
+
+          <label>Specialty</label>
+          <input type="text" [(ngModel)]="editForm.specialty" name="specialty" />
+
+          <label>Bio</label>
+          <textarea [(ngModel)]="editForm.bio" name="bio" rows="4"></textarea>
+
+          <div class="button-row">
+            <button (click)="saveProfile()" class="save-btn">Save</button>
+            <button (click)="cancelEditing()" class="cancel-btn">Cancel</button>
+          </div>
+        </div>
+      }
+
+      @if (saveMessage()) {
+        <p class="save-msg">{{ saveMessage() }}</p>
+      }
+
+      <!-- MY BOOKINGS SECTION -->
+      <h2>My Bookings</h2>
+      @if (bookings().length === 0) {
+        <p class="status">No bookings yet.</p>
+      } @else {
+        <div class="bookings-list">
+          @for (booking of bookings(); track booking.id) {
+            <div class="booking-card">
+              <div class="booking-name">{{ booking.name }}</div>
+              <div class="booking-details">
+                {{ booking.date }} at {{ booking.time }}
+              </div>
+              <div class="booking-phone">📞 {{ booking.phone }}</div>
+            </div>
+          }
+        </div>
+      }
+    }
+
+  </div>
+</div>
