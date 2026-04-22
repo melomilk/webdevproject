@@ -9,9 +9,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './profile.css',
 })
 export class Profile {
-  token: string | null = localStorage.getItem('token');
+  token: string | null = localStorage.getItem('access_token');
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     this.token = null;
-  }}
+}}
