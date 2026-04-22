@@ -43,6 +43,10 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/masters/`);
   }
 
+  getReviews(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/reviews/`);
+  }
+
   // Customer creates a booking (no login needed)
   createBooking(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/bookings/`, data);

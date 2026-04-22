@@ -1,7 +1,25 @@
 <div class="page">
   <div class="card">
+
     <h1>Reviews</h1>
-    <p>★★★★★ “Amazing service!”</p>
-    <p>★★★★★ “Very professional staff!”</p>
+
+    @if (loading()) {
+      <div>Loading...</div>
+    }
+
+    @if (error()) {
+      <div>{{ error() }}</div>
+    }
+
+    @if (!loading() && !error()) {
+
+      @for (review of reviews(); track review.created_at) {
+        <p>
+          {{ '★'.repeat(review.rating) }} <br>
+          “{{ review.text }}” — {{ review.name }}
+        </p>
+      }
+
+    }
   </div>
 </div>
