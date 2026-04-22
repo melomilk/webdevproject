@@ -6,11 +6,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Service, Master, Gallery, Booking, Review
-from .permissions import IsManager
+from .permissions import IsManager, IsMaster
 from .serializers import (
     ServiceSerializer, MasterSerializer,
     GallerySerializer, BookingSerializer, ReviewSerializer,
     MyTokenObtainPairSerializer,
+    MyMasterProfileSerializer,
 )
 
 
@@ -121,3 +122,45 @@ def reviews(request):
                 serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+# MASTER-ONLY ENDPOINTS
+
+@api_view(['GET', 'PATCH'])
+@permission_classes([IsMaster])
+def my_master_profile(request):
+    """Мастер получает и редактирует свой профиль."""
+    try:
+        master = request.user.master_profile
+    except Master.DoesNotExist:
+        return Response(
+            {"error": "No master profile linked to this user."},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    if request.method == 'GET':
+        serializer = MyMasterProfileSerializer(master)
+        return Response(serializer.data)
+    
+    if request.method == 'PATCH':
+        serializer = MyMasterProfileSerializer(master, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsMaster])
+def my_master_bookings(request):
+    """Мастер видит только свои бронирования."""
+    try:
+        master = request.user.master_profile
+    except Master.DoesNotExist:
+        return Response(
+            {"error": "No master profile linked to this user."},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    bookings = Booking.objects.filter(master=master)
+    serializer = BookingSerializer(bookings, many=True)
+    return Response(serializer.data)

@@ -11,4 +11,6 @@ urlpatterns = [
     path('bookings/', bookings),
     path('reviews/', reviews),
     path('bookings/<int:pk>/', bookings),
+    path('master/me/', views.my_master_profile),
+    path('master/bookings/', views.my_master_bookings),
 ]
