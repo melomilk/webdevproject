@@ -2,6 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
+export interface Master {
+  id: number;
+  name: string;
+  specialty: string;
+  bio: string;
+  photo: string | null;
+}
+
 export interface Service {
   id: number;
   name: string;
@@ -56,5 +65,18 @@ export class ApiService {
 
   deleteBooking(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/bookings/${id}/`);
+  }
+// MASTER-ONLY ENDPOINTS
+
+  getMyMasterProfile(): Observable<Master> {
+    return this.http.get<Master>(`${this.baseUrl}/master/me/`);
+  }
+
+  updateMyMasterProfile(data: Partial<Master>): Observable<Master> {
+    return this.http.patch<Master>(`${this.baseUrl}/master/me/`, data);
+  }
+
+  getMyMasterBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/master/bookings/`);
   }
 }
