@@ -2,6 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface GalleryItem {
+  id: number;
+  image: string;
+  description: string;
+  master_id: number;
+  master_name: string;
+  created_at: string;
+}
 
 export interface Master {
   id: number;
@@ -78,5 +86,27 @@ export class ApiService {
 
   getMyMasterBookings(): Observable<Booking[]> {
     return this.http.get<Booking[]>(`${this.baseUrl}/master/bookings/`);
+  }
+
+// GALLERY ENDPOINTS
+
+  getAllGallery(): Observable<GalleryItem[]> {
+    return this.http.get<GalleryItem[]>(`${this.baseUrl}/gallery/`);
+  }
+
+  getMasterGallery(masterId: number): Observable<GalleryItem[]> {
+    return this.http.get<GalleryItem[]>(`${this.baseUrl}/masters/${masterId}/gallery/`);
+  }
+
+  uploadGalleryItem(formData: FormData): Observable<GalleryItem> {
+    return this.http.post<GalleryItem>(`${this.baseUrl}/gallery/`, formData);
+  }
+
+  updateGalleryItem(id: number, data: { description: string }): Observable<GalleryItem> {
+    return this.http.patch<GalleryItem>(`${this.baseUrl}/gallery/${id}/`, data);
+  }
+
+  deleteGalleryItem(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/gallery/${id}/`);
   }
 }

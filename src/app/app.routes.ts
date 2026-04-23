@@ -10,9 +10,9 @@ import { ManagerBookings } from './pages/manager-bookings/manager-bookings';
 
 import { About } from './pages/about/about';
 import { Pricing } from './pages/pricing/pricing';
-import { Portfolio } from './pages/portfolio/portfolio';
 import { Reviews } from './pages/reviews/reviews';
 import { MasterPortfolio } from './pages/master-portfolio/master-portfolio';
+import { Gallery } from './pages/gallery/gallery';
 
 import { Consultation } from './pages/consultation/consultation';
 import { Offers } from './pages/offers/offers';
@@ -28,10 +28,11 @@ export const routes: Routes = [
   { path: 'masters', component: Masters },
   { path: 'about', component: About },
   { path: 'pricing', component: Pricing },
-  { path: 'portfolio', component: Portfolio },
+  { path: 'portfolio', redirectTo: '/gallery', pathMatch: 'full' },
   { path: 'reviews', component: Reviews },
   { path: 'consultation', component: Consultation },
   { path: 'offers', component: Offers },
+  { path: 'gallery', component: Gallery },
 
   // Protected routes
   { path: 'profile', component: Profile, canActivate: [authGuard] },

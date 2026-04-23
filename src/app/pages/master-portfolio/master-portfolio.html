@@ -11,9 +11,9 @@
 
     @if (profile(); as p) {
       <h1>My Portfolio</h1>
-      <p class="subtitle">Manage your information</p>
+      <p class="subtitle">Manage your information and works</p>
 
-      <!-- PROFILE VIEW MODE -->
+      <!-- PROFILE SECTION -->
       @if (!editing()) {
         <div class="profile-section">
           <div class="profile-row">
@@ -28,23 +28,18 @@
             <span class="label">Bio</span>
             <span class="value">{{ p.bio || '(no bio yet)' }}</span>
           </div>
-
           <button (click)="startEditing()" class="edit-btn">Edit Profile</button>
         </div>
       }
 
-      <!-- PROFILE EDIT MODE -->
       @if (editing()) {
         <div class="edit-section">
           <label>Name</label>
           <input type="text" [(ngModel)]="editForm.name" name="name" />
-
           <label>Specialty</label>
           <input type="text" [(ngModel)]="editForm.specialty" name="specialty" />
-
           <label>Bio</label>
           <textarea [(ngModel)]="editForm.bio" name="bio" rows="4"></textarea>
-
           <div class="button-row">
             <button (click)="saveProfile()" class="save-btn">Save</button>
             <button (click)="cancelEditing()" class="cancel-btn">Cancel</button>
@@ -56,7 +51,75 @@
         <p class="save-msg">{{ saveMessage() }}</p>
       }
 
-      <!-- MY BOOKINGS SECTION -->
+      <!-- GALLERY SECTION -->
+      <h2>My Works</h2>
+
+      <div class="upload-form">
+        <label for="fileInput" class="file-label">
+          @if (selectedFile) {
+            Selected: {{ selectedFile.name }}
+          } @else {
+            Choose image...
+          }
+        </label>
+        <input 
+          type="file" 
+          id="fileInput" 
+          accept="image/*" 
+          (change)="onFileSelected($event)"
+          class="file-input"
+        />
+        <input 
+          type="text" 
+          placeholder="Description (optional)" 
+          [(ngModel)]="uploadDescription" 
+          name="uploadDesc"
+          class="desc-input"
+        />
+        <button 
+          (click)="uploadWork()" 
+          [disabled]="uploading() || !selectedFile"
+          class="upload-btn"
+        >
+          @if (uploading()) { Uploading... } @else { Upload Work }
+        </button>
+      </div>
+
+      @if (uploadError()) {
+        <p class="status error">{{ uploadError() }}</p>
+      }
+
+      @if (gallery().length === 0) {
+        <p class="status">No works uploaded yet.</p>
+      } @else {
+        <div class="gallery-grid">
+          @for (item of gallery(); track item.id) {
+            <div class="gallery-item">
+              <img [src]="getImageUrl(item.image)" alt="Work by {{ item.master_name }}" />
+              
+              @if (editingGalleryId() === item.id) {
+                <div class="gallery-edit">
+                  <input 
+                    type="text" 
+                    [(ngModel)]="galleryEditDescription" 
+                    name="editDesc-{{ item.id }}"
+                  />
+                  <button (click)="saveGalleryEdit(item.id)" class="small-btn save">Save</button>
+                  <button (click)="cancelEditingGallery()" class="small-btn cancel">Cancel</button>
+                </div>
+              } @else {
+                <p class="gallery-desc">{{ item.description || '(no description)' }}</p>
+                <div class="gallery-actions">
+                  <button (click)="startEditingGallery(item)" class="small-btn">Edit</button>
+                  <button (click)="deleteWork(item.id)" class="small-btn delete">Delete</button>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      <!-- BOOKINGS SECTION -->
       <h2>My Bookings</h2>
       @if (bookings().length === 0) {
         <p class="status">No bookings yet.</p>
@@ -65,9 +128,7 @@
           @for (booking of bookings(); track booking.id) {
             <div class="booking-card">
               <div class="booking-name">{{ booking.name }}</div>
-              <div class="booking-details">
-                {{ booking.date }} at {{ booking.time }}
-              </div>
+              <div class="booking-details">{{ booking.date }} at {{ booking.time }}</div>
               <div class="booking-phone">📞 {{ booking.phone }}</div>
             </div>
           }

@@ -64,3 +64,12 @@ class MyMasterProfileSerializer(serializers.ModelSerializer):
         model = Master
         fields = ['id', 'name', 'specialty', 'bio', 'photo']
         read_only_fields = ['id']
+
+class GallerySerializer(serializers.ModelSerializer):
+    master_name = serializers.CharField(source='master.name', read_only=True)
+    master_id = serializers.IntegerField(source='master.id', read_only=True)
+    
+    class Meta:
+        model = Gallery
+        fields = ['id', 'image', 'description', 'master_id', 'master_name', 'created_at']
+        read_only_fields = ['id', 'master_id', 'master_name', 'created_at']

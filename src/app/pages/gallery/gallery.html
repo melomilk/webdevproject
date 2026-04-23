@@ -1,0 +1,61 @@
+<div class="gallery-page">
+  <div class="container">
+    <h1>Our Works</h1>
+    <p class="subtitle">See the artistry of our masters</p>
+
+    @if (loading()) {
+      <p class="status">Loading gallery...</p>
+    }
+
+    @if (error()) {
+      <p class="status error">{{ error() }}</p>
+    }
+
+    @if (!loading() && allItems().length === 0) {
+      <p class="status">No works yet. Check back soon!</p>
+    }
+
+    @if (!loading() && allItems().length > 0) {
+      <div class="filter-bar">
+        <button 
+          (click)="selectMaster(null)" 
+          [class.active]="selectedMasterId() === null"
+          class="filter-btn"
+        >
+          All masters
+        </button>
+        @for (master of uniqueMasters(); track master.id) {
+          <button 
+            (click)="selectMaster(master.id)"
+            [class.active]="selectedMasterId() === master.id"
+            class="filter-btn"
+          >
+            {{ master.name }}
+          </button>
+        }
+      </div>
+
+      <div class="gallery-grid">
+        @for (item of filteredItems(); track item.id) {
+          <div class="gallery-item">
+            <img 
+              [src]="getImageUrl(item.image)" 
+              [alt]="'Work by ' + item.master_name"
+              loading="lazy"
+            />
+            <div class="item-info">
+              <div class="item-master">By {{ item.master_name }}</div>
+              @if (item.description) {
+                <div class="item-desc">{{ item.description }}</div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (filteredItems().length === 0) {
+        <p class="status">This master has no works yet.</p>
+      }
+    }
+  </div>
+</div>
