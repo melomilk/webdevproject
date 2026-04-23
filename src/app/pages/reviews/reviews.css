@@ -1,161 +1,207 @@
+/* PAGE */
 .reviews-page {
   width: 100%;
   min-height: 100vh;
 
-  background: #ffffff;
+  background: linear-gradient(
+
+    135deg,
+
+    #f3e7d3 0%,
+
+    #d9c2a3 50%,
+
+    #b89b7a 100%
+
+  );
 
   padding: 50px 40px;
   box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
 }
 
-/* TOP CENTER */
-.top-center {
+/* TOP */
+.top {
   text-align: center;
+  margin-bottom: 30px;
 }
 
-.top-center h1 {
-  font-size: 34px;
+.top h1 {
+  font-size: 36px;
   color: #111;
-  margin-bottom: 10px;
 }
-
-.rating {
-  font-size: 14px;
-  color: #555;
-}
-
-.score {
-  font-weight: bold;
-  color: #111;
-  margin-right: 5px;
+.desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  max-width: 280px;
 }
 
 /* CONTENT */
 .content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  height: 75vh;
+
   gap: 60px;
-
-  width: 100%;
-  max-width: 1200px;
-
-  margin: 40px auto 0;
-
-  padding: 0 20px;
 }
 
 /* LEFT */
 .left {
-  flex: 1;
-
+  width: 32%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-
-  padding-top: 30px;
+  gap: 14px;
+  justify-content: center;
 }
 
 .left h2 {
-  font-size: 30px;
-  color: #111;
-
-  margin: 0;
-
-  max-width: 320px;
-  line-height: 1.2;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.arrow {
   font-size: 26px;
-  color: #888;
-  transition: 0.3s;
+  color: #111;
+  line-height: 1.2;
+  margin: 0;
 }
 
-.left h2:hover .arrow {
-  transform: translateX(6px);
+.desc {
+  color: #777;
+}
+
+/* BUTTON */
+.add-btn {
+  margin-top: 10px;
+
+  width: fit-content;
+
+  padding: 10px 14px;
+  border-radius: 12px;
+
+  border: none;
+  background: #111;
+  color: #fff;
+
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  opacity: 0.8;
+}
+
+/* FORM */
+.form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form input,
+.form textarea,
+.form select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
 }
 
 /* RIGHT */
 .right {
-  flex: 1.5;
-}
-
-.right-title {
-  margin-bottom: 12px;
-  font-size: 18px;
-  color: #111;
-}
-
-/* MARQUEE */
-.marquee {
-  height: 380px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid transparent;
-}
-
-.marquee-track {
+  width: 68%;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  animation: scrollUp 20s linear infinite;
+  align-items: stretch; /* 🔥 важно */
 }
 
-@keyframes scrollUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
+/* SCROLL */
+.scroll {
+  display: flex;
+  gap: 20px;
+
+  overflow-x: auto;
+  padding: 10px;
+
+  scroll-snap-type: x mandatory; /* 🔥 красиво как Instagram */
 }
 
-/* CARD */
-.mini-card {
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* CARD (BIG & CUTE) */
+.card {
+  min-width: 420px;
+  height: 400px;
+
   background: #fff;
-
   border: 1px solid #eee;
-  border-radius: 12px;
+  border-radius: 20px;
 
-  padding: 12px;
+  padding: 22px;
 
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
 
-.mini-card .text {
-  font-size: 13px;
-  color: #333;
-}
-
-.mini-card .stars {
-  color: #f5b301;
-  font-size: 12px;
-}
-
-/* USER */
-.user-mini {
-  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+
+  text-align: center;
+
+  gap: 10px;
+
+  box-sizing: border-box;
+
+  scroll-snap-align: start;
+}
+.card:hover {
+  transform: translateY(-6px);
 }
 
-.avatar-mini {
-  width: 28px;
-  height: 28px;
+/* TEXT */
+.text {
+  font-size: 17px;
+  line-height: 1.5;
+  color: #333;
+
+  max-width: 90%;
+}
+
+/* STARS */
+.stars {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  color: #f5b301;
+  font-size: 14px;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+}
+/* USER */
+.name {
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  color: #111;
+
+}
+.user-mini {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+}
+.avatar {
+  width: 38px;
+  height: 38px;
 
   border-radius: 50%;
-
   background: linear-gradient(135deg, #ff4da6, #6c5ce7);
 
   display: flex;
@@ -163,17 +209,18 @@
   align-items: center;
 
   color: white;
-  font-size: 12px;
   font-weight: bold;
 }
 
-.name {
-  font-size: 12px;
-  font-weight: 500;
-  color: #111;
-}
+
 
 .date {
-  font-size: 10px;
+
+  font-size: 11px;
+
   color: #888;
+
+}
+.avatar-mini {
+  margin: 0 auto;
 }

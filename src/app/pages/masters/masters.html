@@ -1,11 +1,38 @@
-<div class="profile" *ngIf="master">
+<div class="masters-page">
 
-  <img [src]="master.image" />
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Our Masters</h1>
+    <p>Choose your stylist and book your perfect look</p>
+  </div>
 
-  <h1>{{ master.name }}</h1>
+  <!-- GRID -->
+  <div class="masters-grid">
 
-  <p>{{ master.specialty }}</p>
+    @for (master of masters; track master.id) {
 
-  <p>⭐ {{ master.experience }} years experience</p>
+      <div class="master-card">
+
+        <div class="avatar">
+          <img [src]="master.image" alt="">
+        </div>
+
+        <h3>{{ master.name }}</h3>
+        <p class="role">{{ master.role }}</p>
+
+        <div class="rating">
+          ★ {{ master.rating }}
+        </div>
+
+        <p class="bio">
+          {{ master.bio }}
+        </p>
+
+
+      </div>
+
+    }
+
+  </div>
 
 </div>

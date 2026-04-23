@@ -1,6 +1,7 @@
 <div class="reviews-page">
-  <!-- TOP CENTER -->
-  <div class="top-center">
+
+  <!-- TOP -->
+  <div class="top">
     <h1>Read reviews,<br>ride with confidence.</h1>
 
     <div class="rating">
@@ -15,61 +16,73 @@
     <!-- LEFT -->
     <div class="left">
       <h2>
-        What our customers are saying
-        <span class="arrow">→</span>
+        What our customers are saying →
       </h2>
+
+      <p class="desc">
+        Real feedback from our clients about beauty services, makeup and styling.
+      </p>
+
+      <!-- 🔥 ADD REVIEW BUTTON -->
+      <button class="add-btn" (click)="showForm = !showForm">
+        + Add review
+      </button>
+
+      <!-- FORM -->
+      @if (showForm) {
+        <div class="form">
+
+          <input placeholder="Name" [(ngModel)]="newReview.name">
+          <textarea placeholder="Your review" [(ngModel)]="newReview.text"></textarea>
+
+          <select [(ngModel)]="newReview.rating">
+            <option [value]="5">★★★★★</option>
+            <option [value]="4">★★★★</option>
+            <option [value]="3">★★★</option>
+            <option [value]="2">★★</option>
+            <option [value]="1">★</option>
+          </select>
+
+          <button (click)="addReview()">Submit</button>
+
+        </div>
+      }
+
     </div>
 
-   <div class="right">
+    <!-- RIGHT -->
+    <div class="right">
 
-  <h3 class="right-title">What customers say</h3>
+      <div class="scroll">
 
-  <div class="marquee">
+        @for (review of reviews(); track review.id ?? $index) {
 
-    <div class="marquee-track">
+          <div class="card">
 
-      @for (review of reviews(); track review.created_at) {
-        <div class="mini-card">
-          <p class="text">“{{ review.text }}”</p>
+            <p class="text">“{{ review.text }}”</p>
 
-          <div class="stars">
-            {{ '★'.repeat(review.rating) }}
-          </div>
-
-          <div class="user-mini">
-            <div class="avatar-mini">
-              {{ review.name[0] }}
+            <div class="stars">
+              {{ '★'.repeat(review.rating) }}
             </div>
 
-            <div>
-              <div class="name">{{ review.name }}</div>
-              <div class="date">1 week ago</div>
-            </div>
-          </div>
-        </div>
-      }
+            <div class="user">
 
-      <!-- 🔥 duplicate for smooth loop -->
-      @for (review of reviews(); track review.created_at + '-dup') {
-        <div class="mini-card">
-          <p class="text">“{{ review.text }}”</p>
+              <div class="avatar">
+                {{ review.name[0] }}
+              </div>
 
-          <div class="stars">
-            {{ '★'.repeat(review.rating) }}
-          </div>
+              <div>
+                <div class="name">{{ review.name }}</div>
+                <div class="date">1 week ago</div>
+              </div>
 
-          <div class="user-mini">
-            <div class="avatar-mini">
-              {{ review.name[0] }}
             </div>
 
-            <div>
-              <div class="name">{{ review.name }}</div>
-              <div class="date">1 week ago</div>
-            </div>
           </div>
-        </div>
-      }
+
+        }
+
+      </div>
 
     </div>
 

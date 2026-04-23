@@ -10,7 +10,7 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
-export class Login {
+export class LoginComponent {
 
   form = {
     username: '',
@@ -34,17 +34,5 @@ export class Login {
         this.error = true;
       }
     });
-  }
-}
-
-export class LoginComponent {
-
-  form = {
-    username: '',
-    password: ''
-  };
-
-  login() {
-    console.log(this.form); // пока просто проверка
   }
 }
