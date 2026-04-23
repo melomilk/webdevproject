@@ -1,4 +1,32 @@
 <div class="page">
+  @if (auth.currentUser()) {
+    <div class="card">
+
+      <h2>Add Review</h2>
+
+      <input
+        type="text"
+        placeholder="auth.currentUser()?.username || 'Your name'"
+        [(ngModel)]="newReview.name"
+        [disabled]=true
+      /><br>
+
+      <textarea
+        placeholder="Your review"
+        [(ngModel)]="newReview.text"
+      ></textarea><br>
+
+      <label>Rating:</label>
+      <select [(ngModel)]="newReview.rating">
+        @for (r of [1,2,3,4,5]; track r) {
+          <option [value]="r">{{ r }}★</option>
+        }
+      </select><br>
+
+      <button [disabled]="!newReview.text || !newReview.name" (click)="submitReview()">Submit</button>
+
+    </div>
+  }
   <div class="card">
 
     <h1>Reviews</h1>

@@ -56,6 +56,10 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/reviews/`);
   }
 
+  addReview(data: any) {
+    return this.http.post(`${this.baseUrl}/reviews/`, data);
+  }
+
   // Customer creates a booking (no login needed)
   createBooking(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/bookings/`, data);
