@@ -36,11 +36,23 @@ class Master(models.Model):
 
 
 class Gallery(models.Model):
+    master = models.ForeignKey(
+        Master,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='gallery_items'
+    )
     image = models.ImageField(upload_to='gallery/')
     description = models.CharField(max_length=300, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Gallery image {self.id}"
+        master_name = self.master.name if self.master else "No master"
+        return f"Gallery #{self.id} by {master_name}"
+
+    class Meta:
+        ordering = ['-created_at']
 
 
 class Booking(models.Model):
