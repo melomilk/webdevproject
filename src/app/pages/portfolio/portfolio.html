@@ -1,6 +1,50 @@
-<div class="page">
-  <div class="card">
-    <h1>Portfolio</h1>
-    <p>Our best works and transformations</p>
+<div class="portfolio">
+<div class="header">
+  <h1>Our Works</h1>
+  <p>Click a card to view master details</p>
+</div>
+  
+
+  <!-- CARDS -->
+  <div class="grid">
+
+    <div class="card"
+         *ngFor="let work of works"
+         (click)="openWork(work)">
+
+      <img [src]="work.image" />
+
+      <div class="overlay">
+        <h3>{{ work.title }}</h3>
+        <p>{{ work.master.name }}</p>
+      </div>
+
+    </div>
+
   </div>
+
+  <!-- POPUP -->
+  <div class="popup" *ngIf="selectedWork" (click)="closePopup()">
+
+  <div class="popup-content" (click)="$event.stopPropagation()">
+
+    <!-- WORK IMAGE -->
+    <img class="work-img" [src]="selectedWork.image" />
+
+    <!-- MASTER IMAGE -->
+    <img class="master-photo" [src]="selectedWork.master.image" />
+
+    <h2>{{ selectedWork.master.name }}</h2>
+
+    <p>⭐ {{ selectedWork.master.experience }} years experience</p>
+    <p>📞 {{ selectedWork.master.phone }}</p>
+
+    <a [routerLink]="['/masters', selectedWork.master.id]">
+      View profile →
+    </a>
+
+    <button (click)="closePopup()">Close</button>
+
+  </div>
+
 </div>
