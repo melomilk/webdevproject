@@ -1,25 +1,115 @@
-.page {
-  width: 100vw;
-  height: 100vh;
-
-  background: url("/beauty.jpg") center/cover no-repeat;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.about-page {
+  color: white;
 }
 
-.card {
-  width: 500px;
-  padding: 40px;
+/* HERO */
+.hero {
+  height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+    url('/beauty.jpg') center/cover no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text {
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 60px;
+}
+
+/* SECTIONS */
+.info-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px 20px;
+  color: white;
+  position: relative;
+  background-attachment: fixed;
+}
+
+/* CARD 1 */
+.info-section:nth-of-type(2) {
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.8)),
+    url('/bg1.jpg') center/cover no-repeat;
+}
+
+/* CARD 2 */
+.info-section:nth-of-type(3) {
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.8)),
+    url('/bg2.jpg') center/cover no-repeat;
+}
+
+/* CARD 3 */
+.info-section:nth-of-type(4) {
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.8)),
+    url('/bg3.jpg') center/cover no-repeat;
+}
+
+
+
+/* CARD */
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  max-width: 900px;
+
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
 
   border-radius: 20px;
+  overflow: hidden;
+  opacity: 0;
 
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(12px);
+  transform: translateY(50px);
 
-  color: white;
-  text-align: center;
+  animation: fadeUp 1s ease forwards;
 
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+@keyframes fadeUp {
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+}
+
+/* IMAGE */
+.info-card img {
+  width: 50%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* TEXT */
+.text {
+  padding: 20px;
+}
+
+.text h2 {
+  font-size: 28px;
+}
+
+.text p {
+  color: rgba(255,255,255,0.7);
+}
+
+/* reverse layout */
+.reverse {
+  flex-direction: row-reverse;
 }
