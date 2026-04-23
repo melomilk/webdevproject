@@ -1,42 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-masters',
-  imports: [CommonModule, FormsModule],
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './masters.html',
   styleUrl: './masters.css',
 })
-export class Masters {masters = [
+export class Masters implements OnInit {
+
+  master: any = null;
+
+  masters = [
     {
-      name: 'Aigerim',
-      specialty: 'Hair Stylist',
+      id: 1,
+      name: 'Anna',
+      image: '/anna.jpg',
+      phone: '+7777000001',
       experience: 5,
-      image: 'https://i.pravatar.cc/150?img=47'
+      specialty: 'Hair Styling'
     },
     {
-      name: 'Dana',
-      specialty: 'Nail Artist',
-      experience: 3,
-      image: 'https://i.pravatar.cc/150?img=32'
-    },
-    {
-      name: 'Alina',
-      specialty: 'Makeup Artist',
+      id: 2,
+      name: 'Mira',
+      image: '/mira.jpg',
+      phone: '+7777000002',
       experience: 7,
-      image: 'https://i.pravatar.cc/150?img=5'
+      specialty: 'Makeup'
     },
     {
-      name: 'Zhanar',
-      specialty: 'Skin Care Specialist',
+      id: 3,
+      name: 'Dana',
+      image: '/dana.jpg',
+      phone: '+7777000003',
       experience: 4,
-      image: 'https://i.pravatar.cc/150?img=12'
+      specialty: 'Nails'
+    },
+    {
+      id: 4,
+      name: 'Lina',
+      image: '/lina.jpg',
+      phone: '+7777000004',
+      experience: 6,
+      specialty: 'Skincare'
     }
   ];
 
-  selectedMaster: any = null;
+  constructor(private route: ActivatedRoute) {}
 
-  selectMaster(master: any) {
-    this.selectedMaster = master;
-  }}
+  ngOnInit() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.master = this.masters.find(m => m.id === id);
+  }
+}

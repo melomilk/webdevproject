@@ -1,12 +1,37 @@
-<div class="login">
-  <h2>Login 💖</h2>
+<div class="page">
 
-  <input placeholder="Username" [(ngModel)]="username" />
-  <input placeholder="Password" type="password" [(ngModel)]="password" />
+  <div class="login-card">
 
-  <button (click)="login()">Login</button>
+    <h1>Login</h1>
 
-  @if (error) {
-    <p class="error">{{ error }}</p>
-  }
+    <form (ngSubmit)="login()">
+
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        [(ngModel)]="form.username"
+      />
+
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        [(ngModel)]="form.password"
+      />
+
+      <button type="submit">Login</button>
+
+    </form>
+
+    <p *ngIf="success" style="color: lightgreen;">
+      Login successful
+    </p>
+
+    <p *ngIf="error" style="color: red;">
+      Login failed
+    </p>
+
+  </div>
+
 </div>

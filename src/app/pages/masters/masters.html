@@ -1,21 +1,11 @@
-<div class="masters">
-  <h2>Our Masters 💇‍♀️</h2>
+<div class="profile" *ngIf="master">
 
-  <div class="grid">
-    @for (master of masters; track master.name) {
-      <div class="card" (click)="selectMaster(master)">
-        <img [src]="master.image" />
-        <h3>{{ master.name }}</h3>
-        <p>{{ master.specialty }}</p>
-        <p>{{ master.experience }} years experience</p>
-      </div>
-    }
-  </div>
+  <img [src]="master.image" />
 
-  @if (selectedMaster) {
-    <div class="selected">
-      <h3>You selected:</h3>
-      <p>{{ selectedMaster.name }} - {{ selectedMaster.specialty }}</p>
-    </div>
-  }
+  <h1>{{ master.name }}</h1>
+
+  <p>{{ master.specialty }}</p>
+
+  <p>⭐ {{ master.experience }} years experience</p>
+
 </div>

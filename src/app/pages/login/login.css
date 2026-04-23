@@ -1,27 +1,118 @@
-.login {
-  width: 300px;
-  margin: 80px auto;
-  text-align: center;
-  padding: 20px;
+.page {
+  width: 100vw;
+  height: 100vh;
+
+  background: url("/beauty.jpg") center/cover no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* 🌫️ glass card как на home */
+.login-card {
+  width: 360px;
+  padding: 40px;
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 🏷️ title */
+.login-card h1 {
+  text-align: center;
+  color: white;
+
+  font-size: 32px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  margin-bottom: 10px;
+}
+
+/* 🧾 inputs */
 input {
   width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 12px 14px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  background: rgba(0,0,0,0.25);
+  color: white;
+
+  outline: none;
+
+  font-size: 14px;
 }
 
+input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* 🔘 button */
 button {
-  width: 100%;
-  padding: 10px;
-  background: #ff4da6;
-  color: white;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 14px;
+
   border: none;
-  border-radius: 8px;
+
+  background: rgba(255,255,255,0.15);
+  color: white;
+
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+  width: 80%;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.25);
+}
+
+/* 🔙 back link */
+.back {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.back:hover {
+  color: white;
+}
+
+/* ❌ / ✅ messages */
+.success {
+  color: lightgreen;
+  font-size: 13px;
+  text-align: center;
 }
 
 .error {
-  color: red;
+  color: #ff6b6b;
+  font-size: 13px;
+  text-align: center;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

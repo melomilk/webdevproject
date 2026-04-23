@@ -10,14 +10,91 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './services.css',
 })
 export class Services {services = [
-    { name: 'Haircut', description: 'Professional haircut', price: 5000 },
-    { name: 'Manicure', description: 'Nail care & design', price: 7000 },
-    { name: 'Makeup', description: 'Evening makeup', price: 12000 },
-    { name: 'Facial', description: 'Skin treatment', price: 9000 },
-  ];
+
+  {
+
+    name: 'Hair Styling',
+
+    description: 'Modern cuts & styling',
+
+    items: [
+
+      'Classic Cut',
+
+      'Wavy Styling',
+
+      'Keratin Straightening',
+
+      'Luxury Blowout'
+
+    ]
+
+  },
+
+  {
+
+    name: 'Makeup',
+
+    description: 'Professional makeup services',
+
+    items: [
+
+      'Day Makeup',
+
+      'Evening Glam',
+
+      'Wedding Makeup'
+
+    ]
+
+  },
+
+  {
+
+    name: 'Nails Design',
+
+    description: 'Manicure & nail art',
+
+    items: [
+
+      'Manicure',
+
+      'Gel Design',
+
+      'Luxury Nails'
+
+    ]
+
+  },
+
+  {
+
+    name: 'Skincare',
+
+    description: 'Glow & skin treatments',
+
+    items: [
+
+      'Deep Cleansing',
+
+      'Hydration Therapy',
+
+      'Glow Facial'
+
+    ]
+
+  }
+
+];
 
   selectedService: any = null;
+  toggleService(service: any) {
 
+  this.selectedService =
+
+    this.selectedService === service ? null : service;
+
+}
   selectService(service: any) {
     this.selectedService = service;
   }}

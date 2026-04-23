@@ -1,7 +1,78 @@
-<div class="page">
-  <div class="card">
-    <h1>Reviews</h1>
-    <p>★★★★★ “Amazing service!”</p>
-    <p>★★★★★ “Very professional staff!”</p>
+<div class="reviews-page">
+  <!-- TOP CENTER -->
+  <div class="top-center">
+    <h1>Read reviews,<br>ride with confidence.</h1>
+
+    <div class="rating">
+      <span class="score">4.8 ★</span>
+      <span class="meta">ADM Beauty · Based on 1200+ reviews</span>
+    </div>
   </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- LEFT -->
+    <div class="left">
+      <h2>
+        What our customers are saying
+        <span class="arrow">→</span>
+      </h2>
+    </div>
+
+   <div class="right">
+
+  <h3 class="right-title">What customers say</h3>
+
+  <div class="marquee">
+
+    <div class="marquee-track">
+
+      @for (review of reviews(); track review.created_at) {
+        <div class="mini-card">
+          <p class="text">“{{ review.text }}”</p>
+
+          <div class="stars">
+            {{ '★'.repeat(review.rating) }}
+          </div>
+
+          <div class="user-mini">
+            <div class="avatar-mini">
+              {{ review.name[0] }}
+            </div>
+
+            <div>
+              <div class="name">{{ review.name }}</div>
+              <div class="date">1 week ago</div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- 🔥 duplicate for smooth loop -->
+      @for (review of reviews(); track review.created_at + '-dup') {
+        <div class="mini-card">
+          <p class="text">“{{ review.text }}”</p>
+
+          <div class="stars">
+            {{ '★'.repeat(review.rating) }}
+          </div>
+
+          <div class="user-mini">
+            <div class="avatar-mini">
+              {{ review.name[0] }}
+            </div>
+
+            <div>
+              <div class="name">{{ review.name }}</div>
+              <div class="date">1 week ago</div>
+            </div>
+          </div>
+        </div>
+      }
+
+    </div>
+
+  </div>
+
 </div>

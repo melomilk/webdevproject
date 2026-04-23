@@ -1,23 +1,34 @@
-<div class="page">
+<div class="services-page">
 
-  <h1>Our Services</h1>
+  <!-- HERO -->
+  <div class="hero-card">
+    <h1>Our Services</h1>
+    <p>We take care of your beauty ✨</p>
+  </div>
 
-  <div class="services-grid">
+  <!-- GRID -->
+  <div class="grid">
 
-    <div class="service-card"
+    <div class="card"
          *ngFor="let s of services"
-         (click)="selectService(s)">
+         (click)="toggleService(s)">
 
-      <h3>{{s.name}}</h3>
-      <p>{{s.description}}</p>
-      <span>{{s.price}} ₸</span>
+      <h3>{{ s.name }}</h3>
+      <p>{{ s.description }}</p>
+
+      <!-- EXPAND (inside card) -->
+      <div class="expand" *ngIf="selectedService === s">
+
+        <ul>
+          <li *ngFor="let item of s.items">
+            {{ item }}
+          </li>
+        </ul>
+
+      </div>
 
     </div>
 
-  </div>
-
-  <div *ngIf="selectedService" class="selected">
-    <h2>Selected: {{selectedService.name}}</h2>
   </div>
 
 </div>
