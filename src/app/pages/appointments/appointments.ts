@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,6 +13,7 @@ import { ApiService, Service } from '../../services/api';
 })
 export class Appointments implements OnInit {
   private api = inject(ApiService);
+  private cdr = inject(ChangeDetectorRef);
 
   services = signal<Service[]>([]);
 
@@ -25,7 +26,7 @@ export class Appointments implements OnInit {
   };
 
   success = false;
-  error = '';
+  error: string | null = null;
   submitting = false;
 
   ngOnInit() {
@@ -36,6 +37,8 @@ export class Appointments implements OnInit {
   }
 
   submit() {
+    if (this.submitting) return; // prevents double submit
+    console.log('SUBMIT CALLED');
     this.error = '';
     this.success = false;
 
@@ -54,10 +57,20 @@ export class Appointments implements OnInit {
     this.submitting = true;
 
     this.api.createBooking(this.form).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('NEXT FIRED:', res);
         this.success = true;
+        this.submitting = false;   // ✅ MUST BE FIRST
+        this.cdr.detectChanges();
+        console.log('SUCCESS SET TO TRUE:', this.success);
+        console.log('FINAL STATE', {
+          submitting: this.submitting,
+          success: this.success,
+          error: this.error
+        });
         this.submitting = false;
         // Reset form
+        setTimeout(() => {
         this.form = {
           name: '',
           phone: '',
@@ -65,11 +78,20 @@ export class Appointments implements OnInit {
           date: '',
           time: '',
         };
+      });
       },
       error: (err) => {
+        console.log('ERROR FIRED:', err);
         this.submitting = false;
-        this.error = 'Failed to create booking. Please try again.';
+        this.success = false;
+        // this.error =
+        // err.error?.non_field_errors?.[0] ||
+        // err.error?.detail ||
+        // JSON.stringify(err.error) ||
+        // 'Failed to create booking. Please try again.';
+        this.error = Object.values(err.error).flat()[0] as string;
         console.error('Booking error:', err);
+        this.cdr.detectChanges();
       },
     });
   }

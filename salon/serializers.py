@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Service, Master, Gallery, Booking, Review
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from datetime import date
+import re
 
 # ModelSerializers (automatically generates fields from the model)
 class ServiceSerializer(serializers.ModelSerializer):
@@ -28,6 +30,33 @@ class BookingSerializer(serializers.Serializer):
     def create(self, validated_data):
         return Booking.objects.create(**validated_data)
 
+    # ✅ field-level validation (phone ONLY)
+    def validate_phone(self, value):
+        if not re.match(r'^\+?[0-9]{7,15}$', value):
+            raise serializers.ValidationError("Invalid phone number format.")
+        return value
+
+    # ✅ cross-field validation (date, time, booking logic)
+    def validate(self, data):
+
+        # ❌ no duplicate bookings
+        if Booking.objects.filter(
+            master=data.get('master'),
+            date=data['date'],
+            time=data['time']
+        ).exists():
+            raise serializers.ValidationError("Slot already booked.")
+
+        # ❌ no past date
+        if data['date'] < date.today():
+            raise serializers.ValidationError("You cannot book in the past date.")
+
+        # ❌ no past time (if today)
+        if data['date'] == date.today():
+            if data['time'] < datetime.now().time():
+                raise serializers.ValidationError("You cannot book in the past time.")
+
+        return data 
 
 class ReviewSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
